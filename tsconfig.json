@@ -10,7 +10,8 @@
     "types": [
       "webpack-env",
       "node"
-    ]
+    ],
+    "experimentalDecorators": true
   },
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true,
