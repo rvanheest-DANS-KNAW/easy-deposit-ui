@@ -27,7 +27,7 @@ class FileUpload extends Component<FileUploadProps> {
     render() {
         return (
             <>
-                <FilesOverview/>
+                <FilesOverview depositId={this.props.depositId}/>
                 <hr/>
                 <FileViewer/>
             </>
