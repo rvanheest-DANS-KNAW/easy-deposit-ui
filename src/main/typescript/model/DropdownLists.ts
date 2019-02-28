@@ -32,6 +32,7 @@ export interface DropdownListEntry {
 
 export interface ContributorIdDropdownListEntry extends DropdownListEntry {
     format: string
+    baseURL?: string
 }
 
 export interface SpatialCoordinatesDropdownListEntry extends DropdownListEntry {

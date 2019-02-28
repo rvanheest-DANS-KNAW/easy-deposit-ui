@@ -46,6 +46,7 @@ import { fetchAllDropdownsAndMetadata } from "../../actions/dropdownActions"
 import { Files, LoadingState as FileOverviewLoadingState } from "../../model/FileInfo"
 import { fetchFiles } from "../../actions/fileOverviewActions"
 import { formValidate } from "./Validation"
+import { asyncFormValidate } from "./AsyncValidation"
 import { inDevelopmentMode } from "../../lib/config"
 
 interface FetchDataErrorProps {
@@ -291,6 +292,17 @@ const composedHOC = compose(
         form: depositFormName,
         enableReinitialize: true,
         validate: formValidate,
+        asyncValidate: asyncFormValidate,
+        asyncBlurFields: [
+            "contributors[].ids[].scheme",
+            "contributors[].ids[].value",
+            "rightsHolders[].ids[].scheme",
+            "rightsHolders[].ids[].value",
+        ],
+        shouldAsyncValidate: props => {
+            console.log("shouldAsyncValidate", props)
+            return true
+        }
     }),
 )
 

@@ -15,7 +15,13 @@
  */
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import { clean, isEmptyString, nonEmptyObject, normalizeEmpty } from "../../../../main/typescript/lib/metadata/misc"
+import {
+    clean,
+    isEmptyString,
+    recursiveIsEmpty,
+    nonEmptyObject,
+    normalizeEmpty,
+} from "../../../../main/typescript/lib/metadata/misc"
 
 describe("misc", () => {
 
@@ -124,6 +130,61 @@ describe("misc", () => {
 
         it("should return false when a string is not empty", () => {
             expect(isEmptyString("foobar")).to.eql(false)
+        })
+    })
+
+    describe("recursiveIsEmpty", () => {
+
+        it("should return true on undefined", () => {
+            expect(recursiveIsEmpty(undefined)).to.eql(true)
+        })
+
+        it("should return true on null", () => {
+            expect(recursiveIsEmpty(null)).to.eql(true)
+        })
+
+        it("should return true on empty string", () => {
+            expect(recursiveIsEmpty("")).to.eql(true)
+        })
+
+        it("should return false on nonempty string", () => {
+            expect(recursiveIsEmpty("foobar")).to.eql(false)
+        })
+
+        it("should return false on number", () => {
+            expect(recursiveIsEmpty(12)).to.eql(false)
+        })
+
+        it("should return true on empty array", () => {
+            expect(recursiveIsEmpty([])).to.eql(true)
+        })
+
+        it("should return false on nonempty array", () => {
+            const array = []
+            array[3] = "foo"
+            expect(recursiveIsEmpty(array)).to.eql(false)
+        })
+
+        it("should return true on empty object", () => {
+            expect(recursiveIsEmpty({})).to.eql(true)
+        })
+
+        it("should return false on nonempty object", () => {
+            expect(recursiveIsEmpty({foo: "bar"})).to.eql(false)
+        })
+
+        it("should ", () => {
+            const array = []
+            array[3] = {}
+            const obj = {
+                contributors: [
+                    {
+                        ids: array
+                    }
+                ]
+            }
+
+            expect(recursiveIsEmpty(obj)).to.eql(true)
         })
     })
 })

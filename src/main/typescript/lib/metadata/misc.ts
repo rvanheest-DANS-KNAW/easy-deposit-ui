@@ -41,6 +41,16 @@ export function nonEmptyObject<T>(obj: T): boolean {
     return !!obj && !isEmpty(obj)
 }
 
+export function recursiveIsEmpty(x: any): boolean {
+    if (x == null)
+        return true
+    if (x === emptyString)
+        return true
+    if (typeof x === "object")
+        return Object.entries(x).every(x => recursiveIsEmpty(x[1]))
+    return false
+}
+
 export const emptyString: string = ""
 
 export const isEmptyString: (s: String) => boolean = s => s.length === 0
