@@ -32,7 +32,7 @@ import {
 import { PrivacySensitiveDataValue } from "../../../../main/typescript/lib/metadata/PrivacySensitiveData"
 import { Contributor, creatorRole, emptyContributor } from "../../../../main/typescript/lib/metadata/Contributor"
 import {
-    ContributorIdDropdownListEntry,
+    IdentifierDropdownListEntry,
     SpatialCoordinatesDropdownListEntry,
 } from "../../../../main/typescript/model/DropdownLists"
 
@@ -259,7 +259,7 @@ describe("Validation", () => {
         })
     })
 
-    const contributorIdSettings: ContributorIdDropdownListEntry[] = [
+    const contributorIdSettings: IdentifierDropdownListEntry[] = [
         {
             key: "id-type:DAI",
             value: "DAI",

@@ -18,7 +18,7 @@ import asFieldArray, { InnerComponentProps } from "./FieldArrayHOC"
 import { Field, FieldArrayFieldsProps } from "redux-form"
 import TextField, { ErrorHandlingTextField } from "./TextField"
 import { DropdownFieldInput, ErrorHandlingDropdownFieldInput } from "./DropDownField"
-import { ContributorIdDropdownListEntry, DropdownListEntry } from "../../model/DropdownLists"
+import { IdentifierDropdownListEntry, DropdownListEntry } from "../../model/DropdownLists"
 import RemoveButton from "./RemoveButton"
 import { FieldArrayProps, FieldArrayPropsWithDropdown, RepeatableFieldWithDropdown } from "./ReduxFormUtils"
 import { emptySchemedValue, SchemedValue } from "../metadata/Value"
@@ -26,21 +26,21 @@ import AddButton from "./AddButton"
 import Mandatory from "./Mandatory"
 import { Contributor } from "../metadata/Contributor"
 
-function getPlaceholder(fields: FieldArrayFieldsProps<SchemedValue>, index: number, contributorIds: ContributorIdDropdownListEntry[]): string {
+function getPlaceholder(fields: FieldArrayFieldsProps<SchemedValue>, index: number, identifierSettings: IdentifierDropdownListEntry[]): string {
     const contributorId = fields.get(index)
 
     if (contributorId) {
         const scheme = contributorId.scheme
         if (scheme) {
-            const contributorEntry = contributorIds.find(({ key }) => key == scheme)
-            if (contributorEntry)
+            const contributorEntry = identifierSettings.find(({ key }) => key == scheme)
+            if (contributorEntry && contributorEntry.placeholder)
                 return contributorEntry.placeholder
         }
     }
     return "ID"
 }
 
-const ContributorIdArray = ({ fields, fieldNames, empty, dropdowns: { contributorIds } }: FieldArrayPropsWithDropdown<SchemedValue, ContributorIdDropdownListEntry[]>) => (
+const ContributorIdArray = ({ fields, fieldNames, empty, dropdowns: { contributorIds } }: FieldArrayPropsWithDropdown<SchemedValue, IdentifierDropdownListEntry[]>) => (
     <>
         <div className="form-row">
             <div className="col form-group col-12 col-md-3 pl-0 mb-0">
@@ -75,7 +75,7 @@ const ContributorIdArray = ({ fields, fieldNames, empty, dropdowns: { contributo
 )
 
 interface ContributorFieldProps extends InnerComponentProps, FieldArrayProps<Contributor> {
-    idValues: ContributorIdDropdownListEntry[]
+    idValues: IdentifierDropdownListEntry[]
     roleValues?: DropdownListEntry[]
 }
 

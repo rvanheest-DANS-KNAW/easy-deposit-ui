@@ -19,7 +19,7 @@ import { allfields, mandatoryOnly, newMetadata } from "../../mockserver/metadata
 import { metadataConverter, metadataDeconverter } from "../../../../main/typescript/lib/metadata/Metadata"
 import { DropdownList, DropdownListEntry, DropdownLists } from "../../../../main/typescript/model/DropdownLists"
 import {
-    convertContributorIdDropdownData,
+    convertIdentifierDropdownData,
     convertDropdownData,
     convertSpatialCoordinatesDropdownData,
 } from "../../../../main/typescript/lib/dropdown/dropdown"
@@ -41,10 +41,10 @@ describe("Metadata", () => {
 
     const dropdownLists: DropdownLists = {
         languages: dropdownList("languages.json", convertDropdownData),
-        contributorIds: dropdownList("contributorIds.json", convertContributorIdDropdownData),
+        contributorIds: dropdownList("contributorIds.json", convertIdentifierDropdownData),
         contributorRoles: dropdownList("contributorRoles.json", convertDropdownData),
         audiences: dropdownList("audiences.json", convertDropdownData),
-        identifiers: dropdownList("identifiers.json", convertDropdownData),
+        identifiers: dropdownList("identifiers.json", convertIdentifierDropdownData),
         relations: dropdownList("relations.json", convertDropdownData),
         dates: dropdownList("dates.json", convertDropdownData),
         licenses: dropdownList("licenses.json", convertDropdownData),

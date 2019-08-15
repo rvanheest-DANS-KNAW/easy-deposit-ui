@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import {
-    ContributorIdDropdownListEntry,
+    IdentifierDropdownListEntry,
     DropdownListEntry,
     SpatialCoordinatesDropdownListEntry,
 } from "../../model/DropdownLists"
@@ -32,7 +32,7 @@ export const convertDropdownData: (data: any) => DropdownListEntry[] = data => {
         })
 }
 
-export const convertContributorIdDropdownData: (data: any) => ContributorIdDropdownListEntry[] = data => {
+export const convertIdentifierDropdownData: (data: any) => IdentifierDropdownListEntry[] = data => {
     return Object.keys(data)
         .map(key => {
             const obj = data[key]

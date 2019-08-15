@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 import * as React from "react"
-import { ContributorIdDropdownListEntry, DropdownList } from "../../../../model/DropdownLists"
+import { IdentifierDropdownListEntry, DropdownList } from "../../../../model/DropdownLists"
 import { FieldArrayPropsWithDropdown } from "../../../../lib/formComponents/ReduxFormUtils"
 import { Contributor } from "../../../../lib/metadata/Contributor"
 import LoadDropdownData from "../../../../lib/formComponents/LoadDropdownData"
 import ContributorFieldArray from "../../../../lib/formComponents/ContributorFieldArray"
 
-type ContributorFieldsProps = FieldArrayPropsWithDropdown<Contributor, DropdownList<ContributorIdDropdownListEntry>>
+type ContributorFieldsProps = FieldArrayPropsWithDropdown<Contributor, DropdownList<IdentifierDropdownListEntry>>
 
 const ContributorFields = ({dropdowns: {ids, roles}, ...props}: ContributorFieldsProps) => (
     <LoadDropdownData state={ids.state}>

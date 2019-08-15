@@ -30,9 +30,9 @@ export interface DropdownListEntry {
     displayValue: string
 }
 
-export interface ContributorIdDropdownListEntry extends DropdownListEntry {
-    format: string
-    placeholder: string
+export interface IdentifierDropdownListEntry extends DropdownListEntry {
+    format?: string
+    placeholder?: string
 }
 
 export interface SpatialCoordinatesDropdownListEntry extends DropdownListEntry {
@@ -59,10 +59,10 @@ export function emptyDropdownList<Entry extends DropdownListEntry>(): DropdownLi
 
 export interface DropdownLists {
     languages: DropdownList
-    contributorIds: DropdownList<ContributorIdDropdownListEntry>
+    contributorIds: DropdownList<IdentifierDropdownListEntry>
     contributorRoles: DropdownList
     audiences: DropdownList
-    identifiers: DropdownList
+    identifiers: DropdownList<IdentifierDropdownListEntry>
     relations: DropdownList
     dates: DropdownList
     licenses: DropdownList

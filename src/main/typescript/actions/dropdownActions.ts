@@ -18,7 +18,7 @@ import { ComplexThunkAction, FetchAction, PromiseThunkAction, ReduxAction } from
 import fetch from "../lib/fetch"
 import { AxiosRequestConfig } from "axios"
 import {
-    convertContributorIdDropdownData,
+    convertIdentifierDropdownData,
     convertDropdownData,
     convertSpatialCoordinatesDropdownData,
 } from "../lib/dropdown/dropdown"
@@ -85,7 +85,7 @@ const fetchContributorIdsData: PromiseThunkAction = fetchDropdown(
     DropdownConstants.FETCH_CONTRIBUTOR_ID_DROPDOWN_REJECTED,
     "contributorIds.json",
     dds => dds.contributorIds,
-    convertContributorIdDropdownData,
+    convertIdentifierDropdownData,
 )
 
 const fetchContributorRolesData: PromiseThunkAction = fetchDropdown(
@@ -112,7 +112,7 @@ const fetchIdentifiersData: PromiseThunkAction = fetchDropdown(
     DropdownConstants.FETCH_IDENTIFIER_DROPDOWN_REJECTED,
     "identifiers.json",
     dds => dds.identifiers,
-    convertDropdownData,
+    convertIdentifierDropdownData,
 )
 
 const fetchRelationsData: PromiseThunkAction = fetchDropdown(

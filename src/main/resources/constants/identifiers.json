@@ -1,19 +1,27 @@
 {
   "id-type:DOI": {
-    "title": "doi",
-    "viewName": "doi"
+    "title": "DOI",
+    "viewName": "DOI",
+    "format": "^(10[.][0-9]{4,}(?:[.][0-9]+)*/(?:(?![\"&\\'<>])\\S)+)$",
+    "placeholder": "(e.g.: 10.17026/dans-zv9-w9d2)"
   },
   "id-type:URN": {
-    "title": "urn",
-    "viewName": "urn"
+    "title": "URN NBN",
+    "viewName": "URN NBN",
+    "format": "^(?:.*?)([uU][rR][nN]:[nN][bB][nN]:[nN][lL](:([a-zA-Z]{2}))?:\\d{2}-.+)",
+    "placeholder": "(e.g.: urn:nbn:nl:ui:13-ukhm-eb)"
   },
   "id-type:ISBN": {
     "title": "ISBN",
-    "viewName": "ISBN"
+    "viewName": "ISBN",
+    "format": "^(?:ISBN(?:-1[03])?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$|97[89][0-9]{10}$|(?=(?:[0-9]+[- ]){4})[- 0-9]{17}$)(?:97[89][- ]?)?[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$",
+    "placeholder": "(e.g.: ISBN 978 0 849 92007 3)"
   },
   "id-type:ISSN": {
     "title": "ISSN",
-    "viewName": "ISSN"
+    "viewName": "ISSN",
+    "format": "^[0-9]{4}-[0-9]{3}[0-9xX]$",
+    "placeholder": "(e.g.: 1542-1295)"
   },
   "id-type:NWO-PROJECTNR": {
     "title": "NWO project no.",

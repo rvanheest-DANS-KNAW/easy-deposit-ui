@@ -23,7 +23,7 @@ import { Relation } from "../../lib/metadata/Relation"
 import { QualifiedSchemedValue, SchemedValue } from "../../lib/metadata/Value"
 import { Point } from "../../lib/metadata/SpatialPoint"
 import { Box } from "../../lib/metadata/SpatialBox"
-import { ContributorIdDropdownListEntry, SpatialCoordinatesDropdownListEntry } from "../../model/DropdownLists"
+import { IdentifierDropdownListEntry, SpatialCoordinatesDropdownListEntry } from "../../model/DropdownLists"
 
 export const mandatoryFieldValidator = (value: any, name: string) => {
     return !value || typeof value == "string" && value.trim() === ""
@@ -111,7 +111,7 @@ export const atLeastOneCreator = (contributors?: Contributor[]) => {
     }
 }
 
-export const validateContributors: (contributorIdSettings: ContributorIdDropdownListEntry[], contributors: Contributor[]) => Contributor[] = (contributorIdSettings, contributors) => {
+export const validateContributors: (identifierSettings: IdentifierDropdownListEntry[], contributors: Contributor[]) => Contributor[] = (identifierSettings, contributors) => {
     // validate that mandatory fields are filled in for each contributor
     return contributors.map((contributor: Contributor) => {
         const nonEmptyOrganization = checkNonEmpty(contributor.organization)
@@ -142,14 +142,14 @@ export const validateContributors: (contributorIdSettings: ContributorIdDropdown
             }
 
             if (contributor.ids)
-                contribError.ids = validateContributorIds(contributorIdSettings, contributor.ids)
+                contribError.ids = validateContributorIds(identifierSettings, contributor.ids)
         }
 
         return contribError
     })
 }
 
-const validateContributorIds: (contributorIdSettings: ContributorIdDropdownListEntry[], schemedValues: SchemedValue[]) => SchemedValue[] = (contributorIdSettings, schemedValues) => {
+const validateContributorIds: (identifierSettings: IdentifierDropdownListEntry[], schemedValues: SchemedValue[]) => SchemedValue[] = (identifierSettings, schemedValues) => {
     return schemedValues.map(id => {
         const nonEmptyScheme = checkNonEmpty(id.scheme)
         const nonEmptyValue = checkNonEmpty(id.value)
@@ -163,9 +163,9 @@ const validateContributorIds: (contributorIdSettings: ContributorIdDropdownListE
             idError.value = "No identifier given"
 
         if (nonEmptyScheme && nonEmptyValue && id.value) {
-            const entry = contributorIdSettings.find(({ key }) => key === id.scheme)
+            const entry = identifierSettings.find(({ key }) => key === id.scheme)
 
-            if (entry && !id.value.match(entry.format))
+            if (entry && entry.format && !id.value.match(entry.format))
                 idError.value = `Invalid ${entry.displayValue} identifier ${entry.placeholder}`
         }
 
