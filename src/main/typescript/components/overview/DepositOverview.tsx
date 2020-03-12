@@ -62,6 +62,11 @@ const DepositOverview = () => {
         dispatch(cancelDeleteDeposit(depositId))
     }
 
+    const doReuseDataset = (depositId: DepositId) => (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation()
+        console.log(depositId, e)
+    }
+
     const renderLoadingError = () => deposits.loading.loadingError && (
         <ReloadAlert key="loadingError"
                      reload={() => dispatch(fetchDeposits())}>
@@ -114,6 +119,7 @@ const DepositOverview = () => {
                              deleteDeposit={doDeleteDeposit(depositId)}
                              askConfirmation={doAskConfirmation(depositId)}
                              cancelDeleteDeposit={doCancelDeleteFile(depositId)}
+                             reuseDataset={doReuseDataset(depositId)}
                              editable={isEditable(deposits.deposits[depositId])}
                              depositLink={depositFormRoute(depositId)}/>
         ))

@@ -24,7 +24,10 @@ interface EnterableProps {
 }
 
 const Enterable = ({ title }: EnterableProps) => (
-    <div><i className="fas fa-sign-in-alt" id="enter_dataset"/> {title}</div>
+    <div>
+        <i style={{display: "inline-block"}}
+           className="fas fa-sign-in-alt"
+           id="enter_dataset"/> {title}</div>
 )
 
 interface LinkableProps {
@@ -46,16 +49,17 @@ interface DepositTableRowProps {
     deleteDeposit: (e: React.MouseEvent<HTMLButtonElement>) => void
     askConfirmation: (e: React.MouseEvent<HTMLButtonElement>) => void
     cancelDeleteDeposit: (e: React.MouseEvent<HTMLButtonElement>) => void
+    reuseDataset: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const DepositTableRow = ({ deposit, deleting, editable, depositLink, deleteDeposit, askConfirmation, cancelDeleteDeposit }: DepositTableRowProps) => {
+const DepositTableRow = ({ deposit, deleting, editable, depositLink, deleteDeposit, askConfirmation, cancelDeleteDeposit, reuseDataset }: DepositTableRowProps) => {
     const title = <Enterable title={deposit.title}/>
     const isDeleting = deleting && deleting.deleting
 
     const deleteButton = editable &&
         <button type="button"
                 key="delete"
-                className="close"
+                className="close delete"
                 disabled={isDeleting}
                 onClick={askConfirmation}>
             {isDeleting
@@ -71,6 +75,13 @@ const DepositTableRow = ({ deposit, deleting, editable, depositLink, deleteDepos
                 Cancel
             </button>
         </div>
+    const reuseButton = <button type="button"
+                                key="reuse"
+                                className="close reuse"
+                                disabled={isDeleting}
+                                onClick={reuseDataset}>
+        <i className="fas fa-recycle"/>
+    </button>
 
     const enabled = !isDeleting && editable
     const rowStyling = isDeleting ? "" : editable ? "editable_table_row" : "not_editable_table_row"
@@ -95,6 +106,7 @@ const DepositTableRow = ({ deposit, deleting, editable, depositLink, deleteDepos
             </td>
             <td className="col col-2  order-2 col-sm-1  order-sm-2 col-md-1 order-md-5" id="actions_cell">
                 <Linkable enabled={enabled} to={depositLink}/>
+                {reuseButton}
                 {deleteButton}
             </td>
         </tr>
